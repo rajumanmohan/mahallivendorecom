@@ -1,0 +1,19 @@
+{
+  "common.address": "5-60,mahaveer lane,New yark",
+  "common.myAccount": "My Account",
+  "common.grocery": "Switch to Grocery",
+  "common.myProfile": "My Profile",
+  "common.myProducts": "My Products",
+  "common.addProducts": "Add Products",
+  "common.vendorOrder": "My Orders",
+  "common.changePassword": "Change password",
+  "common.signout": "Signout",
+  "common.intro": "Mahali Market?",
+  "common.loreum": "Mahali Market is the good for ecommerse products",
+  "common.loreum1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "common.login": "Login",
+  "common.signup": "Sign Up",
+  "common.email": "Email ID",
+  "common.forgotPswrd": "Forgot Password",
+  "common.orderplaced": "Thank You Your Order Placed Successfully"
+}

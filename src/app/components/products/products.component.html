@@ -1,0 +1,189 @@
+<app-header [cartCount]="cartCount" [billing]="billing"></app-header>
+<div class="container products">
+    <div class="row">
+        <div class="col-md-3">
+            <h5>Category</h5>
+            <br />
+            <!-- <div class="categories">
+				<div id="panel-group">
+				  <div class="panel panel-default" *ngFor="let item of category; let i = index">
+					<div class="panel-heading" (click) = "current = i;item.id">
+					<p class="panel-title">
+						<i class="fa fa-plus" aria-hidden="true" *ngIf="i != current"></i>
+						<i class="fa fa-minus" aria-hidden="true" *ngIf="i == current"></i>
+					   {{item.category_name}}
+					</p>
+					   <hr>
+					</div>
+					 <div id="collapse1" class="panel-collapse"  [class.collapse]='current != i' *ngFor="let subCat of subCatData">
+					<div class="panel-body subcat" *ngIf="item.id===subCat.category_id"><p class="subCat">{{subCat.sub_category_name}}</p> </div>
+					</div>
+				  </div>
+				  </div> 
+			  </div> -->
+
+            <div class="categories" *ngFor="let cat of category; let i = index">
+                <p [ngClass]="{'active':showCategories && i==selectedCat}">
+                    <a>
+                        <i class="fa fa-plus" aria-hidden="true" *ngIf="!showCategories"
+                            (click)="showsubCat(i,cat.id)"></i>
+                        <i class="fa fa-plus" aria-hidden="true" *ngIf="showCategories && i!==selectedCat"
+                            (click)="showsubCat(i,cat.id)"></i>
+
+                        <i class="fa fa-minus" aria-hidden="true" *ngIf="showCategories && i==selectedCat"
+                            (click)="closesubSubCat()"></i>
+                    </a> &nbsp;&nbsp;<span
+                        (click)="getCatProducts(cat.id,cat.category_name)">{{cat.category_name}}</span>
+                </p>
+                <hr>
+                <!-- categories -->
+
+                <div class="subCates">
+                    <div *ngFor="let subCat of subCategory;let ii = index">
+                        <p *ngIf="selectedCat==i && showCategories" id="subCat"
+                            [ngClass]="{'active':showSubCategories }">
+                            <span
+                                (click)="getSubProducts(subCat.id,subCat.sub_category_name)">{{subCat.sub_category_name}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h5>Brand</h5>
+            <div class="brands">
+                <input type="text" placeholder="Search by Brand" [(ngModel)]="brand" (keyup.enter)="selectBrand(brand)">
+                <br />
+                <div class=" brand-names">
+                    <!-- <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                        <label class="custom-control-label" for="defaultUnchecked">Apple</label>
+                    </div> -->
+                    <!-- <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
+                        <label class="custom-control-label" for="defaultUnchecked1">Asus</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked2">
+                        <label class="custom-control-label" for="defaultUnchecked2">Celkon</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked3">
+                        <label class="custom-control-label" for="defaultUnchecked3">HTC</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked4">
+                        <label class="custom-control-label" for="defaultUnchecked4">Intex</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked5">
+                        <label class="custom-control-label" for="defaultUnchecked5">Lenovo</label>
+                    </div> -->
+                    <ul class="categories-list brand-filter">
+                        <li class="active-category" *ngFor="let brand of Brands" (click)="selectBrand(brand.brand)">
+                            <div class="custom-control custom-checkbox terms-checkbox">
+                                <a class="check-a" [ngClass]="{'active-a':selectedBrnd==brand.brand}"><img
+                                        *ngIf="selectedBrnd==brand.brand" src="assets/images/check-mark.png"
+                                        [ngClass]="{'check-img':selectedBrnd==brand.brand}"></a>
+                                <label>{{brand.brand}}</label>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <!-- <h5>Sort</h5>
+            <div class="sort">
+                <select>
+                    <option>Sort</option>
+                </select>
+            </div>
+            <br />
+            <h5>Price</h5>
+            <div class="price">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked6">
+                    <label class="custom-control-label" for="defaultUnchecked6">Less than 5000</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked7">
+                    <label class="custom-control-label" for="defaultUnchecked7">Less than 10000</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked8">
+                    <label class="custom-control-label" for="defaultUnchecked8">Less than 15000</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked9">
+                    <label class="custom-control-label" for="defaultUnchecked9">Less than 20000</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked10">
+                    <label class="custom-control-label" for="defaultUnchecked10">Less than 25000</label>
+                </div>
+            </div> -->
+
+        </div>
+        <div class="col-md-9 items">
+            <p>
+                <a routerLink="/">Home</a>&nbsp;&nbsp;>&nbsp;
+                <a *ngIf="catName1"><a>{{catName1}}</a>&nbsp;&nbsp;>&nbsp;</a>
+                <a *ngIf="subCatName1"><a>{{subCatName1}}</a></a>
+            </p>
+            <div class="row" *ngIf="searchProd">
+                <div class="col-lg-3 col-md-6 col-sm-6 item" *ngFor="let data of prodData;let i=index">
+                    <div class="card">
+                        <img class="img-fluid" [src]="data.image" alt="Card image cap"
+                            (click)="showProduxtDetails(data.product_id)">
+                        <div class="card-block">
+                            <h5 class="text-center">{{data.product_name}} </h5>
+                            <p class="text-center">
+                                BD {{data?.selling_price}}
+                                <strike>BD {{data?.actual_price}}</strike>
+                            </p>
+                            <div class="sort">
+                                <select (change)="changeSize($event.target.value)">
+                                    <option *ngFor="let sku of data.sku_row" [value]="sku?.skid">{{sku?.size}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" class="btn cart-btn"
+                            (click)="checkProdQuty(data.product_id,data.skid)">Add To
+                            Cart
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="noData1">
+                    No records Found
+                </div>
+            </div>
+            <div class="row" *ngIf="seeAll">
+                <div class="col-lg-3 col-md-6 col-sm-6 item" *ngFor="let data of prodData;let i=index">
+                    <div class="card">
+                        <img class="img-fluid" [src]="data.image" alt="Card image cap"
+                            (click)="showProduxtDetails(data.product_id)">
+                        <div class="card-block">
+                            <h5 class="text-center">{{data.product_name}} </h5>
+                            <p class="text-center">
+                                BD {{data?.selling_price}}
+                                <strike>BD {{data?.actual_price}}</strike>
+                            </p>
+                            <div class="sort">
+                                <select (change)="changeSize($event.target.value)">
+                                    <option *ngFor="let sku of data.sku_row" [value]="sku?.skid">{{sku?.size}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" class="btn cart-btn"
+                            (click)="checkProdQuty(data.product_id,data.skid)">Add To
+                            Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="noData">
+                No Products Found
+            </div>
+        </div>
+    </div>
+</div>
