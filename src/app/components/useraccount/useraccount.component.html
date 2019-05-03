@@ -873,6 +873,7 @@
                         <th scope="col" style="font-size:18px;">Brand</th>
                         <th scope="col" style="font-size:18px;">Quantity</th>
                         <th scope="col" style="font-size:18px;">Price</th>
+                        <th scope="col" style="font-size:18px;">Total</th>
                         <th scope="col" style="font-size:18px;">Status</th>
                     </tr>
                 </thead>
@@ -888,10 +889,12 @@
                         <td>{{orddata.brand}}</td>
                         <td>{{orddata.quantity}}</td>
                         <td>BD {{orddata.selling_price}}</td>
+                        <td>BD {{orddata.selling_price * orddata.quantity}}</td>
                         <td>{{orddata.status}}</td>
                     </tr>
                     <tr>
                         <td>Total</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -1757,7 +1760,27 @@
         <div class="col-lg-9" *ngIf="showManageUserOrders">
             <div id="userOrd">
                 <div>
-                    <h3 class="profile-header">Manage User Orders</h3>
+                    <h3 class="profile-header" data-html2canvas-ignore="true">Manage User Orders</h3>
+                    <div class="slip-header" id="logo">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="assets/images/logo.png" alt="img">
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    <i class="fa fa-envelope-square" aria-hidden="true"> &nbsp;&nbsp;
+                                        <b>info@mahallimall.com</b>
+                                    </i>
+                                </p>
+
+                                <p>
+                                    <i class="fa fa-phone-square" aria-hidden="true">&nbsp;&nbsp;
+                                        <b>+97317555666</b>
+                                    </i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="order-details">
                     <p>Order no : {{ordId}}</p>
@@ -1771,8 +1794,12 @@
                                 <th scope="col" style="font-size:18px;">Brand</th>
                                 <th scope="col" style="font-size:18px;">Quantity</th>
                                 <th scope="col" style="font-size:18px;">Price</th>
-                                <th scope="col" style="font-size:18px;">Status</th>
-                                <th scope="col" style="font-size:18px;">Change Status</th>
+                                <th scope="col" style="font-size:18px;">Total</th>
+                                <!-- <th scope="col" style="font-size:18px;">Status</th> -->
+                                <th scope="col" style="font-size:18px;" data-html2canvas-ignore="true">Change Status
+                                </th>
+                                <th scope="col" style="font-size:18px;" id="order_status1">Status</th>
+
                             </tr>
                         </thead>
                         <tbody class="table-data myorder-details">
@@ -1787,19 +1814,22 @@
                                 <td>{{orddata.brand}}</td>
                                 <td>{{orddata?.quantity}}</td>
                                 <td>BD {{orddata?.selling_price}}</td>
-                                <td>{{orddata?.order_status}}</td>
-                                <td>
+                                <td>BD {{orddata?.selling_price * orddata?.quantity}}</td>
+                                <!-- <td>{{orddata?.order_status}}</td> -->
+                                <td data-html2canvas-ignore="true">
                                     <select id="company" class="form-control order-status"
                                         (change)="orderStatus($event.target.value,orddata.cart_id,ordId)">
                                         <option disabled>select status</option>
                                         <option value="Placed">Placed</option>
                                         <option value="Processing">Processing</option>
                                         <option value="Out for Delivery">Out for Delivery</option>
+                                        <option value="Cancel">Cancel</option>
                                         <option value="Declined">Declined</option>
-
                                     </select>
                                 </td>
-
+                                <td id="order_status2">
+                                    {{orddata?.order_status}}
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -1808,10 +1838,12 @@
                                 <td>
                                 </td>
                                 <td></td>
-                                <td></td>
                                 <td>
-                                    <strong>BD {{count}}</strong>
+
                                 </td>
+                                <td></td>
+                                <td><strong>BD {{count}}</strong></td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1858,24 +1890,25 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size: 16px;">Order Status</td>
+                            <td></td>
+                            <!-- <td style="font-size: 16px;">Order Status</td> -->
                             <td class="prod-price">
                                 <div class="details-status">
-                                    <select id="company" class="form-control order-status"
+                                    <!-- <select id="company" class="form-control order-status"
                                         (change)="statusChange($event.target.value,ordId)">
                                         <option disabled>select status</option>
                                         <option value="Placed">Placed</option>
                                         <option value="Processing">Processing</option>
                                         <option value="Out for Delivery">Out for Delivery</option>
-                                    </select>
+                                    </select> -->
                                     <p>
                                         <a (click)="htmlToPdf()" class="download-slip" id="hide">Download Delivery
                                             slip</a>
                                     </p>
-                                    <div class="">
+                                    <!-- <div class="">
                                         <button type="submit" class="btn cust-savechanges" (click)="orderStatus()">Save
                                             Changes</button>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </td>
                         </tr>
@@ -1927,14 +1960,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="quantity" class="col-sm-3 col-form-label">Quantity</label>
+                                        <label for="quantity" class="col-sm-3 col-form-label">Stock</label>
                                         <div class="col-sm-8">
 
                                             <input type="text" class="form-control" id="quantity2"
                                                 formControlName="quantity" class="form-control"
                                                 [ngClass]="{ 'is-invalid': quantity_errors }">
                                             <div *ngIf="quantity_errors" class="invalid-feedback">
-                                                <div *ngIf="quantity_errors">Quantity is required</div>
+                                                <div *ngIf="quantity_errors">Stock is required</div>
                                             </div>
 
                                         </div>
@@ -1942,7 +1975,6 @@
                                     <div class="form-group row">
                                         <label for="discount" class="col-sm-3 col-form-label">Discount</label>
                                         <div class="col-sm-8">
-
                                             <input type="text" class="form-control" id="discount"
                                                 formControlName="discount" class="form-control"
                                                 [ngClass]="{ 'is-invalid': discount_error }">
@@ -1952,17 +1984,17 @@
 
                                         </div>
                                     </div>
-                                    <!-- <div class="form-group row">
-                                        <label for="status" class="col-sm-3 col-form-label">Status</label>
+                                    <div class="form-group row">
+                                        <label for="quantity" class="col-sm-3 col-form-label">Quantity</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="status" formControlName="discount"
-                                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f2.discount.errors }">
-                                            <div *ngIf="submitted && f2.discount.errors" class="invalid-feedback">
-                                                <div *ngIf="f2.discount.errors.required">Status is required</div>
+                                            <input type="text" class="form-control" id="quantity2"
+                                                formControlName="units" class="form-control"
+                                                [ngClass]="{ 'is-invalid': status_errors }">
+                                            <div *ngIf="status_errors" class="invalid-feedback">
+                                                <div *ngIf="status_errors">Quantity is required</div>
                                             </div>
-                                            <button type="submit" class="btn add-button pop-save" (click)="save(reqProds.product_id)">SAVE</button>
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <div class="form-group row">
                                         <!-- <label for="sel1" class="col-sm-3 col-form-label">Status:</label> -->
                                         <div class="col-sm-8">

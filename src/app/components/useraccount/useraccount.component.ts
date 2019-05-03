@@ -73,6 +73,7 @@ export class UseraccountComponent implements OnInit {
             price: [''],
             quantity: [''],
             discount: [''],
+            units: ['']
             // product_status: ['']
             // vendor_id: sessionStorage.userId,
             // product_id: this.productId
@@ -703,7 +704,13 @@ export class UseraccountComponent implements OnInit {
         } else if (this.productForm.value.discount === '') {
             this.quantity_errors = false;
             this.deal_price_errors = false;
-            this.discount_error =true;
+            this.discount_error = true;
+            return;
+        } else if (this.productForm.value.units === '') {
+            this.status_errors = true;
+            this.discount_error = false;
+            this.quantity_errors = false;
+            this.deal_price_errors = false;
             return;
         }
         // this.productId = prodId;
@@ -864,7 +871,9 @@ export class UseraccountComponent implements OnInit {
     htmlToPdf() {
         var data = document.getElementById('userOrd');
         // $('#title').innerHTML = "My Orders";
-
+        $('.slip-header').show();
+        $('#order_status2').show();
+        $('#order_status1').show();
         html2canvas(data).then(canvas => {
             // var img = new Image(); img.crossOrigin = "anonymous";
             // this.ImgSrc = btoa(document.getElementById("imgId").getAttribute('src'));
@@ -879,6 +888,9 @@ export class UseraccountComponent implements OnInit {
             var position = 0;
             pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
             pdf.save('MYPdf.pdf'); // Generated PDF   
+            $('.slip-header').hide();
+            $('#order_status2').hide();
+            $('#order_status1').hide();
         });
         // $("#imgId").show();
     }
@@ -891,8 +903,10 @@ export class UseraccountComponent implements OnInit {
             for (var i = 0; i < this.ordData.length; i++) {
                 // this.ordData[i].prodStatus = this.ordData[i].order_status;
                 // this.ordData[i].cart_id = this.ordData[i].products.cart_id;
-                // this.ordData[i].size = this.ordData[i].sku_details[0].size;
-                // this.ordData[i].selling_price = this.ordData[i].sku_details[0].selling_price;
+                this.ordData[i].quantity = this.ordData[i].updated_quantity;
+                this.ordData[i].selling_price = this.ordData[i].updated_price;
+                this.ordData[i].order_status = this.ordData[i].order_status;
+
             }
             this.orderDet = resp.json().Order.details[0];
             this.ordAdd = resp.json().Order.delivery_address[0];

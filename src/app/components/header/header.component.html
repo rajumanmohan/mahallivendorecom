@@ -25,7 +25,7 @@
                     </a>
                     <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary cust-menu" role="menu">
                         <a class="dropdown-item waves-light" mdbRippleRadius
-                            href="hhttps://www.mahalli.com/mahaliVendorGrocery/">{{"common.grocery"|translate}}
+                            href="mahalli.com/mahaliVendorGrocery/">{{"common.grocery"|translate}}
                         </a>
                         <hr />
                         <a class="dropdown-item waves-light" mdbRippleRadius
@@ -258,7 +258,7 @@
                     <h5 class="mb-0">
                         <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true"
                             aria-controls="collapse-1" (click)="showProbyCat(cat.id,'category',cat.category_name)">
-                           {{cat.category_name}}
+                            {{cat.category_name}}
                         </a>
                     </h5>
                 </div>
@@ -981,9 +981,7 @@
                                                 <div class="product-name">
                                                     <div class="product-name-div row">
                                                         <ul>
-                                                            <li *ngFor="let product of productArr"
-                                                                (click)="showProbySubCat(sub.id,'subCategory',cat.category_name,sub.sub_category_name)"
-                                                                class="prodName-li">
+                                                            <li *ngFor="let product of productArr" class="prodName-li">
                                                                 <a class="prodName-li"
                                                                     (click)="showProduxtDetails(product.product_id)">{{product.product_name}}</a>
                                                             </li>

@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit {
     pinCode1;
     pin_code1;
     catId;
+    catFirstId;
     constructor(public dialog: MatDialog, private router: Router, public appService: appService, private formBuilder: FormBuilder, private zone: NgZone) {
         if (sessionStorage.token === undefined) {
             this.showRegistration = true;
@@ -163,7 +164,7 @@ export class HeaderComponent implements OnInit {
         this.getCart();
         // this.geoLocation();
         this.Area = sessionStorage.city;
-        // this.showSubCat1();
+        this.showSubCat(this.catFirstId, '');
     }
 
     hideSubCats() {
@@ -381,26 +382,6 @@ export class HeaderComponent implements OnInit {
             }
         }
     }
-    // showSubCat1() {
-    //     this.showSubCats = true;
-    //     for (var i = 0; i < this.category.length; i++) {
-    //         for (var j = 0; j < this.category[i].subcategory.length; j++) {
-    //             if (this.catId === this.category[i].subcategory[j].category_id) {
-    //                 this.category[i].subcategory[j].cat_name = this.category[i].category_name;
-    //                 this.subCatData.push(this.category[i].subcategory[j]);
-    //                 console.log(this.subCatData);
-    //                 debugger
-
-    //             }
-    //             // for (var k = 0; k < this.category[i].subcategory[j].products.length; k++) {
-    //             //     if (Id === this.category[i].subcategory[j].products[k].category_id) {
-    //             //         this.productsData = this.category[i].subcategory[j].products[k];
-    //             //         this.productArr.push(this.productsData);
-    //             //     }
-    //             // }
-    //         }
-    //     }
-    // }
     showProds(Id) {
         this.subId = Id;
         this.showSubCats = true;
