@@ -72,10 +72,11 @@
             <div class="col-md-3" *ngFor="let data of ecomProds">
                 <div class="wrapper">
                     <div class="card">
-                        <img class="img-fluid" [src]="data.image" alt="Card image cap"
+                        <img src="assets/images/background-img.png" class="bg-layer">
+                        <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
                             (click)="showProduxtDetails(data.product_id)">
                         <div class="card-block">
-                            <h5 class="text-center">{{data.product_name}}
+                            <h5 class="text-center prod-name">{{data.product_name}}
                             </h5>
                             <p class="text-center">
                                 BD {{data.selling_price}}
@@ -131,11 +132,13 @@
     <br />
     <div class="row">
 
-        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12" *ngFor="let feature of offerBan">
-            <img [src]="feature.website_banner">
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12" *ngFor="let feature of offerBan;let i=index">
+            <img *ngIf="i<3" [src]="feature.website_banner">
         </div>
     </div>
 </div>
+<br />
+
 <!-- features end -->
 
 <!-- offers -->
@@ -167,10 +170,11 @@
             <div class="col-md-3" *ngFor="let data of topOffers">
                 <div class="wrapper">
                     <div class="card">
-                        <img class="img-fluid" [src]="data.image" alt="Card image cap"
+                        <img src="assets/images/background-img.png" class="bg-layer">
+                        <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
                             (click)="showProduxtDetails(data.product_id)">
                         <div class="card-block">
-                            <h5 class="text-center">{{data.product_name}}
+                            <h5 class="text-center prod-name">{{data.product_name}}
                             </h5>
                             <p class="text-center">
                                 BD {{data.selling_price}}
@@ -390,10 +394,11 @@
             <div class="col-lg-3 col-md-6 col-sm-6 item" *ngFor="let data of allProductsData;let i=index">
                 <div class="wrapper">
                     <div class="card">
-                        <img class="img-fluid" [src]="data.image" alt="Card image cap"
+                        <img src="assets/images/background-img.png" class="bg-layer">
+                        <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
                             (click)="showProduxtDetails(data.product_id)">
                         <div class="card-block">
-                            <h5 class="text-center">{{data.product_name}} </h5>
+                            <h5 class="text-center prod-name">{{data.product_name}} </h5>
                             <p class="text-center">
                                 BD {{data?.selling_price}}
                                 <strike>BD {{data?.actual_price}}</strike>
@@ -455,7 +460,7 @@
 </div>
 <div id="multi-item-example4" class="carousel slide carousel-multi-item container" data-ride="carousel"
     *ngIf="EcomCats[1]?.show_in_vender==='1'">
-  
+
     <!--Slides-->
     <div class="carousel-inner deals" role="listbox">
 
@@ -464,10 +469,11 @@
             <div class="col-lg-3 col-md-6 col-sm-6 item" *ngFor="let data of allProductsData1;let i=index">
                 <div class="wrapper">
                     <div class="card">
-                        <img class="img-fluid" [src]="data.image" alt="Card image cap"
+                        <img src="assets/images/background-img.png" class="bg-layer">
+                        <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
                             (click)="showProduxtDetails(data.product_id)">
                         <div class="card-block">
-                            <h5 class="text-center">{{data.product_name}} </h5>
+                            <h5 class="text-center prod-name">{{data.product_name}} </h5>
                             <p class="text-center">
                                 BD {{data?.selling_price}}
                                 <strike>BD {{data?.actual_price}}</strike>
@@ -521,7 +527,7 @@
 <br />
 
 <!-- recently viewed -->
-<!-- <div class="container-fluid deals-header">
+<div class="container-fluid deals-header">
     <div class="row justify-content-center">
         <div class="col-lg-4">
             <h4 class="text-center">Recently Viewed
@@ -532,22 +538,23 @@
         </div>
     </div>
     <hr>
-</div> -->
-<!-- <div id="multi-item-example5" class="carousel slide carousel-multi-item container" data-ride="carousel">
+</div>
+<div id="multi-item-example5" class="carousel slide carousel-multi-item container" data-ride="carousel">
 
 
 
     <br />
-   
+
     <div class="carousel-inner deals" role="listbox">
 
-        
+
         <div class="carousel-item active dealsAct">
 
             <div class="col-md-3" *ngFor="let data of ecomArr">
                 <div class="wrapper">
                     <div class="card">
-                        <img class="img-fluid" [src]="data.quality_image" alt="Card image cap" (click)="showProduxtDetails(data.product_id)">
+                        <img class="img-fluid" [src]="data.quality_image" alt="Card image cap"
+                            (click)="showProduxtDetails(data.product_id)">
                         <div class="card-block">
                             <h5 class="text-center">{{data.product_name}}
                             </h5>
@@ -562,25 +569,23 @@
                         </div>
                     </div>
                     <ul class="expand-button">
-                        <li><a><i class="fas fa-shopping-basket" (click)="checkProdQuty(data.product_id,data.skid)"></i></a>
+                        <li><a><i class="fas fa-shopping-basket"
+                                    (click)="checkProdQuty(data.product_id,data.skid)"></i></a>
                         </li>
                         <li><a href="#"><img src="assets/images/maximize.png"></a></li>
                     </ul>
                 </div>
             </div>
-
-          
-
-
-
-
+            <div>
+                <h4>No Products Found</h4>
+            </div>
         </div>
-       
+
 
     </div>
-    
 
-</div> -->
+
+</div>
 
 <!-- end recently viewed -->
 
@@ -613,10 +618,11 @@
             <div class="col-md-3 recProds" *ngFor="let data of ecomProds">
                 <div class="wrapper">
                     <div class="card">
-                        <img class="img-fluid" [src]="data.image" alt="Card image cap"
+                        <img src="assets/images/background-img.png" class="bg-layer">
+                        <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
                             (click)="showProduxtDetails(data.product_id)">
                         <div class="card-block">
-                            <h5 class="text-center">{{data.product_name}}
+                            <h5 class="text-center prod-name">{{data.product_name}}
                             </h5>
                             <p class="text-center">
                                 BD {{data.selling_price}}

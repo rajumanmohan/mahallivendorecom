@@ -133,7 +133,8 @@
             <div class="row" *ngIf="searchProd">
                 <div class="col-lg-3 col-md-6 col-sm-6 item" *ngFor="let data of prodData;let i=index">
                     <div class="card">
-                        <img class="img-fluid" [src]="data.image" alt="Card image cap"
+                        <img src="assets/images/background-img.png" class="bg-layer">
+                        <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
                             (click)="showProduxtDetails(data.product_id)">
                         <div class="card-block">
                             <h5 class="text-center">{{data.product_name}} </h5>
@@ -160,7 +161,8 @@
             <div class="row" *ngIf="seeAll">
                 <div class="col-lg-3 col-md-6 col-sm-6 item" *ngFor="let data of prodData;let i=index">
                     <div class="card">
-                        <img class="img-fluid" [src]="data.image" alt="Card image cap"
+                        <img src="assets/images/background-img.png" class="bg-layer">
+                        <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
                             (click)="showProduxtDetails(data.product_id)">
                         <div class="card-block">
                             <h5 class="text-center">{{data.product_name}} </h5>

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsData } from '../../services/productsdata';
 import { ProductService } from '../../services/productservice';
 import { appService } from './../../services/mahaliServices/mahali.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-productdetails',
@@ -12,7 +13,7 @@ import { appService } from './../../services/mahaliServices/mahali.service';
 
 export class ProductdetailsComponent implements OnInit {
     product: ProductsData;
-    constructor(private route: ActivatedRoute, public productService: ProductService, private appService: appService) {
+    constructor(private route: ActivatedRoute, public productService: ProductService, private appService: appService, private router: Router) {
         this.route.queryParams.subscribe(params => {
             this.prodId = params.prodId;
         });
@@ -71,6 +72,7 @@ export class ProductdetailsComponent implements OnInit {
     catName;
     subCatName;
     prodName;
+    cat_id1;
     getProductById() {
         this.skuData = [];
         this.appService.getProductById(this.prodId).subscribe(res => {
@@ -82,6 +84,7 @@ export class ProductdetailsComponent implements OnInit {
                 this.catName = this.prodsData[0].category_name;
                 this.subCatName = this.prodsData[0].sub_category_name;
                 this.prodName = this.prodsData[0].product_name;
+                this.cat_id1 = this.prodsData[0].category_id;
                 for (var j = 0; j < this.prodsData[i].sku_row.length; j++) {
                     this.offer_price = this.prodsData[i].sku_row[0].offer_price;
                     this.actual_price = this.prodsData[i].sku_row[0].actual_price;
@@ -98,6 +101,36 @@ export class ProductdetailsComponent implements OnInit {
                     }
                 }
             }
+            let params = {
+                // "country": sessionStorage.country,
+                // "pin_code": sessionStorage.pinCode === "undefined" ? "null" : sessionStorage.pinCode,
+                // "area": sessionStorage.Area === "undefined" ? "null" : sessionStorage.Area,
+                "user_id": sessionStorage.userId
+            }
+            this.appService.productByCatId(this.cat_id1, params).subscribe(res => {
+                this.prodData = res.json().products;
+                if (this.prodData != undefined) {
+                    for (var i = 0; i < this.prodData.length; i++) {
+                        for (var j = 0; j < this.prodData[i].sku_row.length; j++) {
+                            this.prodData[i].selling_price = this.prodData[i].sku_row[0].selling_price;
+                            this.prodData[i].actual_price = this.prodData[i].sku_row[0].actual_price;
+                            this.prodData[i].image = this.prodData[i].sku_row[0].sku_images[0].sku_image;
+                            this.prodData[i].skid = this.prodData[i].sku_row[0].skid;
+                            this.skid = this.prodData[i].sku_row[0].skid;
+                        }
+
+                    }
+                    // this.noData = false;
+                    // this.noData1 = false;
+                }
+                if (res.json().status === 400) {
+                    // this.noData = true;
+                }
+
+
+            }, err => {
+
+            })
 
         }, err => {
 
@@ -142,11 +175,11 @@ export class ProductdetailsComponent implements OnInit {
 
         })
     }
-    addtoCart(id) {
+    addtoCart(id, skuId) {
         var inData = {
             "products": [{
                 product_id: id,
-                sku_id: this.skid
+                sku_id: skuId
             }],
             "vendor_id": sessionStorage.getItem('userId'),
             "item_type": "ecommerce"
@@ -161,14 +194,17 @@ export class ProductdetailsComponent implements OnInit {
 
         })
     }
-    checkProdQuty(prodId) {
-        this.appService.checkQuty(prodId, this.skid, 0).subscribe(res => {
+    checkProdQuty(prodId, skuId) {
+        this.appService.checkQuty(prodId, skuId, 0).subscribe(res => {
             if (res.json().status === 200) {
-                this.addtoCart(prodId);
+                this.addtoCart(prodId, skuId);
             } else {
                 swal(res.json().message, "", "error");
                 // this.NoStockMsg = res.json().data;
             }
         })
     }
+    // showProduxtDetails(prodId) {
+    //     this.router.navigate(['/productdetails'], { queryParams: { prodId: prodId } });
+    // }
 }

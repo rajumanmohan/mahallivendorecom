@@ -1,9 +1,10 @@
-const baseUrl = 'http://192.169.243.70:3000/v1/'
+// const baseUrl = 'http://192.169.243.70:3000/v1/';//(LOCAL)
+const baseUrl = 'https://www.mahalli.com/v1/';//(HTTPS)
 
 export const AppSettings = {
     registrationUrl: baseUrl + 'vendors/registration',
     loginUrl: baseUrl + 'vendors/login',
-    changePwdUrl: baseUrl + 'vendors/changepassword',
+    changePwdUrl: baseUrl + 'vendors/change_password',
     categoriesUrl: baseUrl + 'categories/ecommers',
     productUrl: baseUrl + 'products',
     loginDetailsbyEmail: baseUrl + 'vendors/',
@@ -65,5 +66,8 @@ export const AppSettings = {
     orderDetByVenId: baseUrl + "place_order/order_userproducts",
     checkQuty: baseUrl + "vendor/cart_details/stockavailable",
     getBannerProds: baseUrl + "banners/bannerproducts",
+    getDetailsById: baseUrl + "vendors/vendor_id",
+    forgotwithEmail: baseUrl + "vendors/forgot_passwordbyemail",
+
 }
 

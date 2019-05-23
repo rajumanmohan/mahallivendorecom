@@ -17,6 +17,7 @@ export class MycartComponent implements OnInit {
     showDeliveryType = false;
     payment_option;
     addresses = false;
+    stackCheck;
     constructor(public dialog: MatDialog, private appService: appService, private router: Router) { }
 
     ngOnInit() {
@@ -63,7 +64,7 @@ export class MycartComponent implements OnInit {
     }
     type;
     Type(type) {
-        this.type = type;
+        this.type = type || 'Home';
     }
     //save address
     saveAddress() {
@@ -79,11 +80,14 @@ export class MycartComponent implements OnInit {
 
         }
         this.appService.addaddress(inData).subscribe(res => {
-            this.getAdd();
-            this.showAddresses = true;
-            this.addresses = false;
-            swal(res.json().message, "", "success");
-
+            if (res.json().status == 200) {
+                this.getAdd();
+                this.showAddresses = true;
+                this.addresses = false;
+                swal(res.json().message, "", "success");
+            } else {
+                swal(res.json().message, "", "error");
+            }
         })
 
     }
@@ -236,14 +240,16 @@ export class MycartComponent implements OnInit {
     checkProdQuty(cartId, prodId, skuId, qunt) {
         this.appService.checkQuty(prodId, skuId, qunt).subscribe(res => {
             if (res.json().status === 200) {
+                this.stackCheck = "In Stock";
                 this.itemIncrease(cartId);
             } else {
+                this.stackCheck = "Out of Stock";
                 swal(res.json().message, "", "error");
             }
         })
     }
 
-    itemDecrease(cartId) {
+    itemDecrease(cartId, prodId, skuId, qunt, venId, venprodId) {
         for (var i = 0; i < this.cartData.length; i++) {
             if (this.cartData[i].cart_id === cartId) {
                 if (this.cartData[i].quantity === 1) {
@@ -252,6 +258,14 @@ export class MycartComponent implements OnInit {
                 } else {
                     this.cartData[i].quantity = this.cartData[i].quantity - 1;
                     this.modifyCart(this.cartData[i].quantity, cartId);
+                    this.appService.checkQuty(prodId, skuId, qunt).subscribe(res => {
+                        if (res.json().status === 200) {
+                            this.stackCheck = "In Stock";
+                        } else {
+                            this.stackCheck = "Out of Stock";
+                            // swal(res.json().message, "", "error");
+                        }
+                    })
                 }
                 // this.getCart();
                 return;

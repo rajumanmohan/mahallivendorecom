@@ -9,8 +9,8 @@ body {
   /* padding-top: 4.5rem; */
 }
 
-body.modal-open {
-  padding-right: 40px !important;
+.modal-open {
+  padding-right: 0px !important;
 }
 
 .place-order button {
@@ -43,10 +43,6 @@ h4 a {
 .btn-maroon {
   background-color: #7eba00;
   border-radius: 9px !important;
-}
-
-.carousel-inner {
-  height: 315px;
 }
 
 .fa-chevron-right {
@@ -243,4 +239,10 @@ body.modal-open {
   .carousel-inner {
     height: auto;
   }
+}
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #801323 !important;
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #801323 !important;
 }

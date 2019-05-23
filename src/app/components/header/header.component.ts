@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
     showOpacity = false;
     forgotSubmitted = false;
     changePwSubmitted = false;
+    forgotForm1: FormGroup;
     google: any;
     city1;
     showLocation = false;
@@ -56,6 +57,8 @@ export class HeaderComponent implements OnInit {
     pin_code1;
     catId;
     catFirstId;
+    selLogin;
+    forgotSubmitted1 = false;
     constructor(public dialog: MatDialog, private router: Router, public appService: appService, private formBuilder: FormBuilder, private zone: NgZone) {
         if (sessionStorage.token === undefined) {
             this.showRegistration = true;
@@ -126,6 +129,7 @@ export class HeaderComponent implements OnInit {
     userName;
     location;
     ngOnInit() {
+        this.selLogin = 1;
         if (sessionStorage.token === undefined) {
             this.showRegistration = true;
             this.showLoginScreen = true;
@@ -142,15 +146,19 @@ export class HeaderComponent implements OnInit {
             first_name: ['', Validators.required],
             last_name: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            mobile_number: ['', [Validators.required]],
+            mobile_number: ['', [Validators.required, Validators.minLength(8)]],
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
         this.loginForm = this.formBuilder.group({
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            email: [''],
+            mobile_number: [''],
+            password: ['']
         });
         this.forgotForm = this.formBuilder.group({
-            mob_number: ['', [Validators.required]],
+            mob_number: ['', [Validators.required, Validators.minLength(8)]],
+        });
+        this.forgotForm1 = this.formBuilder.group({
+            email: ['', [Validators.required]],
         });
         this.changePassForm = this.formBuilder.group({
             password: ['', [Validators.required, Validators.minLength(6)]]
@@ -216,7 +224,7 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/']);
         this.ngOnInit();
         this.getCart();
-        location.reload();
+        // location.reload();
     }
     get f() { return this.registerForm.controls; }
     registration(form: FormGroup) {
@@ -243,31 +251,57 @@ export class HeaderComponent implements OnInit {
         })
 
     }
+    radioChange(selLogin) {
+        this.selLogin = selLogin.value || 1;
+    }
     get f1() { return this.loginForm.controls; }
     login() {
-        this.loginSubmitted = true;
-
-        if (this.loginForm.invalid) {
-            return;
+        if (this.selLogin == 1) {
+            delete this.loginForm.value.mobile_number;
+            if (this.loginForm.value.email == '') {
+                swal("Required Fields are missing", "", "error");
+            }
+        } else {
+            delete this.loginForm.value.email
+            if (this.loginForm.value.mobile_number == '') {
+                swal("Required Fields are missing", "", "error");
+            }
         }
         this.appService.login(this.loginForm.value).subscribe(resp => {
             if (resp.json().status === 200) {
                 swal(resp.json().message, "", "success");
                 sessionStorage.setItem('token', JSON.stringify(resp.json().token));
+                sessionStorage.setItem('userId', (resp.json().id));
                 jQuery("#loginmodal").modal("hide");
                 this.showRegistration = false;
                 this.showLoginScreen = false;
                 this.myAccount = true;
-                this.appService.loginDetailsbyEmail(this.loginForm.value.email).subscribe(response => {
-                    sessionStorage.setItem('phone', (response.json().data[0].mobile_number));
-                    sessionStorage.setItem('email', (response.json().data[0].email));
-                    sessionStorage.setItem('userId', (response.json().data[0].id));
-                    sessionStorage.setItem('userName', (response.json().data[0].first_name) + " " + (response.json().data[0].last_name));
-                    this.loginDetails = response.json().data[0];
-                    this.phone = true;
-                    this.ngOnInit();
+                if (this.loginForm.value.email != undefined) {
+                    this.appService.loginDetailsbyEmail(this.loginForm.value.email).subscribe(response => {
+                        sessionStorage.setItem('phone', (response.json().data[0].mobile_number));
+                        sessionStorage.setItem('email', (response.json().data[0].email));
+                        sessionStorage.setItem('userId', (response.json().data[0].id));
+                        sessionStorage.setItem('userName', (response.json().data[0].first_name) + " " + (response.json().data[0].last_name));
+                        this.loginDetails = response.json().data[0];
+                        this.phone = true;
+                        this.ngOnInit();
 
-                })
+                    })
+                } else {
+                    this.appService.getDetailsById().subscribe(response => {
+                        console.log(response.json());
+                        sessionStorage.setItem('phone', (response.json().data[0].mobile_number));
+                        sessionStorage.setItem('email', (response.json().data[0].email));
+                        sessionStorage.setItem('userId', (response.json().data[0].id));
+                        sessionStorage.setItem('userName', (response.json().data[0].first_name) + " " + (response.json().data[0].last_name));
+                        this.loginDetails = response.json().data[0];
+                        this.phone = true;
+                        this.ngOnInit();
+
+                    })
+                }
+
+
             }
             else if (resp.json().status === 404 || resp.json().status === 400) {
                 swal(resp.json().message, "", "error");
@@ -295,6 +329,32 @@ export class HeaderComponent implements OnInit {
                 swal(resp.json().message, "", "error");
             }
 
+
+        }, err => {
+            swal(err.json().message, "", "error");
+        })
+    }
+    get f3() { return this.forgotForm1.controls; }
+    forgot1() {
+        this.forgotSubmitted1 = true;
+        if (this.forgotForm1.invalid) {
+            return;
+        }
+        var inData = {
+            email: this.forgotForm1.value.email
+        }
+        this.appService.forgotwithEmail(inData).subscribe(resp => {
+            if (resp.json().status === 200) {
+                jQuery("#forgotpass").modal("hide");
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+                swal(resp.json().message, "", "success");
+                jQuery("#otpScreen").modal("show");
+                sessionStorage.setItem('mobile_number', (resp.json().mobile_number));
+
+            } else {
+                swal(resp.json().message, "", "error");
+            }
 
         }, err => {
             swal(err.json().message, "", "error");

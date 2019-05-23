@@ -12,6 +12,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import swal from 'sweetalert'
 import { Ng2SearchPipeModule } from 'ng2-search-filter'; //importing the module
+import { NumberOnlyDirective } from './directives/number';
 
 
 //components
@@ -44,6 +45,7 @@ import { GooglePlacesDirective } from './directives/google-places.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ImageZoomModule } from 'angular2-image-zoom';
 import { StaticComponent } from './components/static/static.component';
+import { MatRadioModule } from '@angular/material';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -72,8 +74,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         GooglePlacesDirective,
         AddressComponent,
         FreshvegetablesComponent,
-        StaticComponent
-
+        StaticComponent,
+        NumberOnlyDirective
     ],
     imports: [
         BrowserModule,
@@ -86,6 +88,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         Ng2SearchPipeModule,
         ImageZoomModule,
         SafePipeModule,
+        MatRadioModule,
         MDBBootstrapModule.forRoot(),
         TranslateModule.forRoot({
             loader: {

@@ -65,9 +65,9 @@ export class UseraccountComponent implements OnInit {
             pin_code: ['', Validators.required],
         });
         this.resetForm = this.formBuilder.group({
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            new_password: ['', [Validators.required, Validators.minLength(6)]],
+            password: ['', [Validators.required]],
+            new_password: ['', [Validators.required]],
+            retype_password: ['', [Validators.required]],
         });
         this.productForm = this.formBuilder.group({
             price: [''],
@@ -547,6 +547,7 @@ export class UseraccountComponent implements OnInit {
     updateProfile() {
         var inDate = {
             first_name: this.profileData.first_name,
+            last_name: this.profileData.last_name,
             email: this.profileData.email,
             mobile_number: this.profileData.mobile_number,
             bussiness_area: this.profileData.bussiness_area,
@@ -558,7 +559,6 @@ export class UseraccountComponent implements OnInit {
         this.appService.updateProfile(inDate).subscribe(response => {
             console.log(response.json());
             swal(response.json().message, "", "success");
-            this.ngOnInit();
             this.getProfile();
             this.cancel();
         })
@@ -609,10 +609,11 @@ export class UseraccountComponent implements OnInit {
         // stop here if form is invalid
         if (this.resetForm.invalid) {
             return;
-        } else if (this.resetForm.value.password != this.resetForm.value.new_password) {
+        } else if (this.resetForm.value.new_password != this.resetForm.value.retype_password) {
             swal("Passwords doesn't matched", "", "warning");
             return;
         }
+        delete this.resetForm.value.retype_password;
         this.appService.changePwd(this.resetForm.value).subscribe(resp => {
             if (resp.json().status === 200) {
                 swal(resp.json().message, "", "success");
@@ -872,8 +873,8 @@ export class UseraccountComponent implements OnInit {
         var data = document.getElementById('userOrd');
         // $('#title').innerHTML = "My Orders";
         $('.slip-header').show();
-        $('#order_status2').show();
-        $('#order_status1').show();
+        $('.order_status2').show();
+        $('.order_status1').show();
         html2canvas(data).then(canvas => {
             // var img = new Image(); img.crossOrigin = "anonymous";
             // this.ImgSrc = btoa(document.getElementById("imgId").getAttribute('src'));
@@ -889,8 +890,8 @@ export class UseraccountComponent implements OnInit {
             pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
             pdf.save('MYPdf.pdf'); // Generated PDF   
             $('.slip-header').hide();
-            $('#order_status2').hide();
-            $('#order_status1').hide();
+            $('.order_status2').hide();
+            $('.order_status1').hide();
         });
         // $("#imgId").show();
     }

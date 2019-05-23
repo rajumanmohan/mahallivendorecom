@@ -41,7 +41,7 @@
                 <p>
                     <i class="fa fa-user" aria-hidden="true"
                         style="color:#801424; font-size: 20px;"></i>&nbsp;&nbsp;&nbsp;
-                    <span>{{profileData?.first_name}} </span>
+                    <span>{{profileData?.first_name}} {{profileData?.last_name}} </span>
                 </p>
                 <p>
                     <i class="fa fa-at" aria-hidden="true"
@@ -77,12 +77,21 @@
             <br />
             <form class="form-details" #formCtrl="ngForm">
                 <div class="form-group row">
-                    <label for="inputname1" class="col-sm-3 col-form-label">Name
+                    <label for="inputname1" class="col-sm-3 col-form-label">First Name
                         <span class="float-right">:</span>
                     </label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control input-feild" id="inputname1" name="first_name"
                             [(ngModel)]="profileData.first_name" ngControl="first_name" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputname1" class="col-sm-3 col-form-label">Last Name
+                        <span class="float-right">:</span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control input-feild" id="inputname1" name="last_name"
+                            [(ngModel)]="profileData.last_name" ngControl="last_name" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -450,7 +459,7 @@
             <p>
                 <strong>Add New Adrress</strong>
             </p>
-            <form [formGroup]="addressForm">
+            <form [formGroup]="addressForm" (click)="saveAddress(newItem)">
                 <div class="form-group row">
                     <label for="inputname1" class="col-sm-2 col-form-label">Full Name
                     </label>
@@ -553,7 +562,7 @@
                 </div>
             </form>
 
-            <button type="button" class="btn address-btn" (click)="saveAddress(newItem)">SUBMIT</button>
+            <button type="button" class="btn address-btn">SUBMIT</button>
             <button type="button" class="btn address-btn" (click)="cancelAdd()">CANCEL</button>
 
         </div>
@@ -823,32 +832,32 @@
                     <h3 class="profile-header">Change password</h3>
                     <form [formGroup]="resetForm" (ngSubmit)="onSubmit()">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="text" formControlName="email" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                <div *ngIf="f.email.errors.required">Email is required</div>
-                                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                            <label for="exampleInputEmail1">Old Password</label>
+                            <input type="password" formControlName="password" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Old password is required</div>
+                                <!-- <div *ngIf="f.password.errors.current_password">Email must be a valid email address</div> -->
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Enter Password</label>
-                            <input type="password" formControlName="password" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                <div *ngIf="f.password.errors.required">Password is required</div>
-                                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                            <input type="password" formControlName="new_password" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.new_password.errors }" />
+                            <div *ngIf="submitted && f.new_password.errors" class="invalid-feedback">
+                                <div *ngIf="f.new_password.errors.required">Password is required</div>
+                                <!-- <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div> -->
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Confirm Password</label>
-                            <input type="password" formControlName="new_password" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && f.new_password.errors }" />
-                            <div *ngIf="submitted && f.new_password.errors" class="invalid-feedback">
-                                <div *ngIf="f.new_password.errors.required">Confirm Password is required</div>
-                                <div *ngIf="f.new_password.errors.minlength">Confirm Password must be at least 6
+                            <input type="password" formControlName="retype_password" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.retype_password.errors }" />
+                            <div *ngIf="submitted && f.retype_password.errors" class="invalid-feedback">
+                                <div *ngIf="f.retype_password.errors.required">Confirm Password is required</div>
+                                <!-- <div *ngIf="f.retype_password.errors.minlength">Confirm Password must be at least 6
                                     characters
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <button class="btn  password-submit">Submit</button>
@@ -1264,10 +1273,10 @@
                                             <th scope="col">S.No</th>
                                             <th scope="col">Order Id</th>
                                             <th scope="col">Order Date & Time</th>
-                                            <th scope="col">customer Name</th>
+                                            <!-- <th scope="col">customer Name</th> -->
                                             <!-- <th scope="col">Order Type</th> -->
                                             <th scope="col">Total Amount</th>
-                                            <!-- <th scope="col">Order Status</th> -->
+                                            <th scope="col">Order Status</th>
                                         </tr>
                                     </thead>
                                     <tbody class="cust-tbody">
@@ -1279,10 +1288,10 @@
                                             </td>
                                             <td>{{ord.ordered_on}}
                                             </td>
-                                            <td>{{ord.wholesaler_name}}</td>
+                                            <!-- <td>{{ord.wholesaler_name}}</td> -->
                                             <!-- <td>Immediate</td> -->
                                             <td>{{ord.billing_amount}}</td>
-                                            <!-- <td>{{ord.order_status}}</td> -->
+                                            <td>View</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1614,7 +1623,7 @@
                                             <th scope="col">S.No</th>
                                             <th scope="col">Order Id</th>
                                             <th scope="col">Order Date & Time</th>
-                                            <th scope="col">Wholeseller Name</th>
+                                            <!-- <th scope="col">Wholeseller Name</th> -->
                                             <th scope="col">Total Amount</th>
                                             <th scope="col">Order Status</th>
                                         </tr>
@@ -1628,7 +1637,7 @@
                                             </td>
                                             <td>
                                                 {{ord.ordered_on}} </td>
-                                            <td>{{ord.wholesaler_id}}</td>
+                                            <!-- <td>{{ord.wholesaler_id}}</td> -->
                                             <td>BD.{{ord.billing_amount}}</td>
                                             <td>View</td>
                                         </tr>
@@ -1798,7 +1807,7 @@
                                 <!-- <th scope="col" style="font-size:18px;">Status</th> -->
                                 <th scope="col" style="font-size:18px;" data-html2canvas-ignore="true">Change Status
                                 </th>
-                                <th scope="col" style="font-size:18px;" id="order_status1">Status</th>
+                                <th scope="col" style="font-size:18px;" class="order_status1">Status</th>
 
                             </tr>
                         </thead>
@@ -1827,7 +1836,7 @@
                                         <option value="Declined">Declined</option>
                                     </select>
                                 </td>
-                                <td id="order_status2">
+                                <td class="order_status2">
                                     {{orddata?.order_status}}
                                 </td>
                             </tr>

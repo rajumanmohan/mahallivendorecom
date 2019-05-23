@@ -22,7 +22,8 @@ export class appService {
             'Content-Type': "application/JSON",
             'x-access-token': JSON.parse(sessionStorage.token)
         });
-        return this.http.post(AppSettings.changePwdUrl, params, { headers: headers });
+        this.vendor_id = sessionStorage.userId;
+        return this.http.post(AppSettings.changePwdUrl + "/" + this.vendor_id, params, { headers: headers });
     }
     getProduct() {
         const headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
@@ -301,6 +302,16 @@ export class appService {
     getBannerProds(ImgId) {
         const headers = new Headers({ 'Content-Type': "application/JSON" });
         return this.http.get(AppSettings.getBannerProds + "/" + ImgId, { headers: headers });
+    }
+    getDetailsById() {
+        const headers = new Headers({ 'Content-Type': "application/JSON" });
+        this.vendor_id = sessionStorage.userId;
+        return this.http.get(AppSettings.getDetailsById + "/" + this.vendor_id, { headers: headers });
+    }
+    forgotwithEmail(params) {
+        const headers = new Headers({ 'Content-Type': "application/JSON" });
+        // this.user_id = sessionStorage.userId;
+        return this.http.post(AppSettings.forgotwithEmail, params, { headers: headers });
     }
 }
 
