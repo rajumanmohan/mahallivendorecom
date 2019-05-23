@@ -68,8 +68,8 @@
             <h4>No Data</h4>
         </div> -->
         <!--First slide-->
-        <div class="carousel-item active dealsAct">
-            <div class="col-md-3" *ngFor="let data of ecomProds">
+        <div class="carousel-item active dealsAct ">
+            <div class="col-md-3 col-sm-6 product-item" *ngFor="let data of ecomProds">
                 <div class="wrapper">
                     <div class="card">
                         <img src="assets/images/background-img.png" class="bg-layer">
@@ -167,7 +167,7 @@
 
         <!--First slide-->
         <div class="carousel-item active dealsAct">
-            <div class="col-md-3" *ngFor="let data of topOffers">
+            <div class="col-md-3 col-sm-6 product-item" *ngFor="let data of topOffers">
                 <div class="wrapper">
                     <div class="card">
                         <img src="assets/images/background-img.png" class="bg-layer">
@@ -180,9 +180,7 @@
                                 BD {{data.selling_price}}
                                 <strike>BD {{data.actual_price}}
                                 </strike>
-
                             </p>
-
                         </div>
                     </div>
                     <ul class="expand-button">
@@ -391,7 +389,7 @@
                     </ul>
                 </div>
             </div> -->
-            <div class="col-lg-3 col-md-6 col-sm-6 item" *ngFor="let data of allProductsData;let i=index">
+            <div class="col-lg-3 col-md-6 col-sm-6  product-item item" *ngFor="let data of allProductsData;let i=index">
                 <div class="wrapper">
                     <div class="card">
                         <img src="assets/images/background-img.png" class="bg-layer">
@@ -465,37 +463,40 @@
     <div class="carousel-inner deals" role="listbox">
 
         <!--First slide-->
-        <div class="carousel-item active dealsAct">
-            <div class="col-lg-3 col-md-6 col-sm-6 item" *ngFor="let data of allProductsData1;let i=index">
-                <div class="wrapper">
-                    <div class="card">
-                        <img src="assets/images/background-img.png" class="bg-layer">
-                        <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
-                            (click)="showProduxtDetails(data.product_id)">
-                        <div class="card-block">
-                            <h5 class="text-center prod-name">{{data.product_name}} </h5>
-                            <p class="text-center">
-                                BD {{data?.selling_price}}
-                                <strike>BD {{data?.actual_price}}</strike>
-                            </p>
-                            <!-- <div class="sort">
-                            <select (change)="changeSize($event.target.value)">
-                                <option *ngFor="let sku of data.sku_row" [value]="sku?.skid">{{sku?.size}}</option>
-                            </select>
-                        </div> -->
+        <div class="carousel-item active dealsAct watches">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 product-item item" *ngFor="let data of allProductsData1;let i=index">
+                    <div class="wrapper">
+                        <div class="card">
+                            <img src="assets/images/background-img.png" class="bg-layer">
+                            <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
+                                (click)="showProduxtDetails(data.product_id)">
+                            <div class="card-block">
+                                <h5 class="text-center prod-name">{{data.product_name}} </h5>
+                                <p class="text-center">
+                                    BD {{data?.selling_price}}
+                                    <strike>BD {{data?.actual_price}}</strike>
+                                </p>
+                                <!-- <div class="sort">
+                                        <select (change)="changeSize($event.target.value)">
+                                            <option *ngFor="let sku of data.sku_row" [value]="sku?.skid">{{sku?.size}}</option>
+                                        </select>
+                                    </div> -->
+                            </div>
+                            <!-- <button type="button" class="btn cart-btn" (click)="checkProdQuty(data.product_id,data.skid)">Add To
+                                    Cart
+                                </button> -->
                         </div>
-                        <!-- <button type="button" class="btn cart-btn" (click)="checkProdQuty(data.product_id,data.skid)">Add To
-                        Cart
-                    </button> -->
+                        <ul class="expand-button">
+                            <li><a><i class="fas fa-shopping-basket"
+                                        (click)="checkProdQuty(data.product_id,data.skid)"></i></a>
+                            </li>
+                            <!-- <li><a href="#"><img src="assets/images/maximize.png"></a></li> -->
+                        </ul>
                     </div>
-                    <ul class="expand-button">
-                        <li><a><i class="fas fa-shopping-basket"
-                                    (click)="checkProdQuty(data.product_id,data.skid)"></i></a>
-                        </li>
-                        <!-- <li><a href="#"><img src="assets/images/maximize.png"></a></li> -->
-                    </ul>
                 </div>
             </div>
+
             <div *ngIf="noData4">
                 <h5>No Products Found</h5>
             </div>
@@ -550,7 +551,7 @@
 
         <div class="carousel-item active dealsAct">
 
-            <div class="col-md-3" *ngFor="let data of ecomArr">
+            <div class="col-md-3 col-sm-6 product-item" *ngFor="let data of ecomArr">
                 <div class="wrapper">
                     <div class="card">
                         <img class="img-fluid" [src]="data.quality_image" alt="Card image cap"
@@ -614,36 +615,39 @@
         <div class="carousel-item active">
             <!-- <div class="noData">
 				No records Found
-			</div> -->
-            <div class="col-md-3 recProds" *ngFor="let data of ecomProds">
-                <div class="wrapper">
-                    <div class="card">
-                        <img src="assets/images/background-img.png" class="bg-layer">
-                        <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
-                            (click)="showProduxtDetails(data.product_id)">
-                        <div class="card-block">
-                            <h5 class="text-center prod-name">{{data.product_name}}
-                            </h5>
-                            <p class="text-center">
-                                BD {{data.selling_price}}
-                                <strike>BD {{data.actual_price}}
-                                </strike>
+            </div> -->
+            <div class="row">
+                <div class="col-md-3 col-sm-6  product-item recProds" *ngFor="let data of ecomProds">
+                    <div class="wrapper">
+                        <div class="card">
+                            <img src="assets/images/background-img.png" class="bg-layer">
+                            <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
+                                (click)="showProduxtDetails(data.product_id)">
+                            <div class="card-block">
+                                <h5 class="text-center prod-name">{{data.product_name}}
+                                </h5>
+                                <p class="text-center">
+                                    BD {{data.selling_price}}
+                                    <strike>BD {{data.actual_price}}
+                                    </strike>
 
-                            </p>
+                                </p>
 
+                            </div>
                         </div>
+                        <ul class="expand-button">
+                            <li><a><i class="fas fa-shopping-basket"
+                                        (click)="checkProdQuty(data.product_id,data.skid)"></i></a>
+                            </li>
+                            <!-- <li><a href="#"><img src="assets/images/maximize.png"></a></li> -->
+                        </ul>
                     </div>
-                    <ul class="expand-button">
-                        <li><a><i class="fas fa-shopping-basket"
-                                    (click)="checkProdQuty(data.product_id,data.skid)"></i></a>
-                        </li>
-                        <!-- <li><a href="#"><img src="assets/images/maximize.png"></a></li> -->
-                    </ul>
+                    <!-- <div *ngIf="noData">
+                                {{noData1}}
+                            </div> -->
                 </div>
-                <!-- <div *ngIf="noData">
-                    {{noData1}}
-                </div> -->
             </div>
+
             <div *ngIf="noData5">
                 <h5>No Products Found</h5>
             </div>

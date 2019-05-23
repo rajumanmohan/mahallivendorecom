@@ -143,12 +143,25 @@ p strike {
     height: 412px !important;
 }
 
+@media screen and (max-width:991px) {
+.prod-name {
+     width: 114px !important; 
+}
+}
 @media screen and (max-width:768px) {
     .card {
         width: 160px;
     }
     .carousel-inner {
         height: auto;
+    }
+    .product-image {
+        height: 147px;
+        width: 117px!important;
+    }
+    .prod-name {
+       width: 200px !important; 
+        margin-top: 28%;
     }
 }
 
@@ -206,14 +219,7 @@ p strike {
     }
 }
 
-@media screen and (max-width:375px) {
-    .card {
-        width: 300px;
-    }
-    .carousel-inner {
-        height: auto;
-    }
-}
+
 
 .fetures img{
 width:100%;
@@ -279,27 +285,16 @@ height:200px;
     // .dealsAct .card{width: 50%;}
     // .card {width: 50%;float: left;}
 }
+
 @media (min-width: 320px) and (max-width: 475px){
     #multi-item-example .carousel-inner{height:auto !important;}
     div#multi-item-example {margin: 0;}
 } 
-@media screen and (max-width: 767px){
-    .carousel, .carousel-multi-item, .carousel-thumbnails{margin-bottom:10px !important;}
-    .col-md-3.recProds {width: 50%;float: left;margin: 10px 0;}
-    .container.product-cat .card {width: 100%;}
-    .carousel-multi-item img {max-width: 100%;width: 100%;margin-top: 0;}
-    .carousel .card-block.col-md-6.recmded {text-align: center;}
-    .carousel-item .card{width:100%;}   
-    #multi-item-example1 .card {
-        width: 50%;
-    }
-    .dealsAct {
-        height: 300px !important;
-    } 
-}
+
 @media screen and (max-width: 991px){
    
     .carousel-inner.product-slider .carousel-item.active {height: auto;}
+   
 }
 .bg-layer{
     width: 100%;
@@ -316,3 +311,86 @@ height:200px;
 .card:hover {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
+
+@media screen and (max-width: 575px){
+    .mobile-number {
+        width: 83% !important;
+    }
+    .fetures img {
+        margin-bottom: 15px;
+    }
+    .product-item{
+        width:70%;
+    }
+    .dealsAct {
+        display: inline-block;
+    }
+    .product-item {
+        width: 68%;
+        margin: 0px auto;
+        padding-top: 7%;
+    }
+    .dealsAct {
+        height: 100%!important;
+    }
+    .prod-name{
+        width: 100% !important;
+    }
+    .product-image {
+        height: 146px;
+        width: 117px!important;
+        margin-top: 20px!important;
+    }
+}
+@media screen and (max-width:375px) {
+    .card {
+        width: 300px;
+    }
+    .carousel-inner {
+        height: auto;
+    }
+    .prod-name{
+        width: 205px !important;
+    }
+    .product-item {
+        width: 69%!important;
+        margin: 0px auto;
+        padding-top: 14%!important;
+    }
+}
+.watches {
+    padding-top: 33%;
+    height: 320px!important;
+}
+@media screen and (max-width:1199px) {
+    .watches{
+        padding-top: 40%;
+        height: 296px!important;
+    }
+    .cart-logo  {
+        width: 59px!important;
+    }
+}
+@media screen and (max-width: 767px){
+    .cust-cost{
+        margin-left: 33px;
+        margin-right: 40px;
+    }
+    .watches{
+        padding-top: 0%!important;
+        height: 100%!important;
+      }
+    .carousel, .carousel-multi-item, .carousel-thumbnails{margin-bottom:10px !important;}
+    .col-md-3.recProds {width: 50%;float: left;margin: 10px 0;}
+    .container.product-cat .card {width: 100%;}
+    .carousel-multi-item img {max-width: 100%;width: 100%;margin-top: 0;}
+    .carousel .card-block.col-md-6.recmded {text-align: center;}
+    .carousel-item .card{width:100%;}   
+    #multi-item-example1 .card {
+    }
+    .dealsAct {
+        height: 100% !important;
+        margin-top: 12%;
+    }
+}
+

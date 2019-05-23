@@ -240,9 +240,26 @@ body.modal-open {
     height: auto;
   }
 }
+
+@media screen and (max-width:991px) {
+  .watches {
+    padding-top: 47%!important;
+    height: 307px!important;
+  }
+  .cart-logo {
+    width: 80px!important;
+  }
+  .cust-cost{
+    margin-left: 36px!important;
+    margin-right: 40px!important;
+}
+  }
 .mat-radio-button.mat-accent .mat-radio-inner-circle {
   background-color: #801323 !important;
 }
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
   border-color: #801323 !important;
+}
+@media screen and (max-width:767px) {
+
 }
