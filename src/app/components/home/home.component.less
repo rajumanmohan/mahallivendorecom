@@ -137,15 +137,17 @@ p strike {
     }
 }
 .deals{
-    height: 420px !important;
+    
+    height: auto !important;
+    margin-top:8%;
 }
 .dealsAct{
-    height: 412px !important;
+    height: auto !important;
 }
 
 @media screen and (max-width:991px) {
 .prod-name {
-     width: 114px !important; 
+     width: 100% !important; 
 }
 }
 @media screen and (max-width:768px) {
@@ -155,12 +157,9 @@ p strike {
     .carousel-inner {
         height: auto;
     }
-    .product-image {
-        height: 147px;
-        width: 117px!important;
-    }
+
     .prod-name {
-       width: 200px !important; 
+       width: 100% !important; 
         margin-top: 28%;
     }
 }
@@ -261,11 +260,7 @@ height:200px;
     .recommendedproducts .card {width: 100%;}
     .dealsAct .card{width: 50%;}
 }
-@media screen and (max-width:520px) {
-    .slider .carousel-inner{height:300px !important;}
-    
-   
-}
+
 @media screen and (min-width: 521px) and (max-width:767px){
     div#multi-item-example1 {margin-bottom: 0 !important;}
     .deals {height: auto !important;}
@@ -273,13 +268,12 @@ height:200px;
     .recommendedproducts .card {width: 100%;}
     .dealsAct .card{width: 50%;}
     .top-offers .dealsAct .card {width: 100%;}
-    #multi-item-example .dealsAct {
-        height: 350px !important;
+    .product-item {
+        margin: 0px auto !important;
     }
 }
 @media screen and (min-width: 767px) and (max-width:991px){
     div#multi-item-example1 {margin-bottom: 0 !important;}
-    div#multi-item-example6 .carousel-item {height:270px;}
     .deals {height: auto !important;}
     .recommendedproducts .card {width: 100%;}
     // .dealsAct .card{width: 50%;}
@@ -304,7 +298,7 @@ height:200px;
 }
 .prod-name {
     white-space: nowrap;
-    width: 200px;
+    width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -338,7 +332,7 @@ height:200px;
     }
     .product-image {
         height: 146px;
-        width: 117px!important;
+        width: 170px!important;
         margin-top: 20px!important;
     }
 }
@@ -350,12 +344,16 @@ height:200px;
         height: auto;
     }
     .prod-name{
-        width: 205px !important;
+        width: 100% !important;
     }
     .product-item {
         width: 69%!important;
         margin: 0px auto;
         padding-top: 14%!important;
+    }
+    .wrapper:hover .expand-button {
+        top: 45px!important;
+        left: 25px!important;
     }
 }
 .watches {
