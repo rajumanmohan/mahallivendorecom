@@ -25,7 +25,8 @@
                     <div class="quantity-price text-center">
                         <select (change)="changeSize($event.target.value)">
                             <option *ngFor="let sku of skuData" [value]="sku.skid" data-icon="images/sample-1.jpg"
-                                class="left">{{sku.size}} {{sku.size_measuring_unit=='undefined'?'':sku.size_measuring_unit}}
+                                class="left">{{sku.size}}
+                                {{sku.size_measuring_unit=='undefined'?'':sku.size_measuring_unit}}
 
                                 - BD {{sku.selling_price}}
                             </option>
@@ -93,7 +94,7 @@
             <div class="carousel-inner product-slider" role="listbox">
 
                 <!--First slide-->
-                <div class="carousel-item active">
+                <div class="row  active">
                     <div class="col-lg-3 col-md-6 col-sm-6 item" *ngFor="let data of prodData;let i=index">
                         <div class="card" *ngIf="i<4">
                             <img src="assets/images/background-img.png" class="bg-layer">
@@ -107,7 +108,8 @@
                                 </p>
                                 <div class="sort">
                                     <select (change)="changeSize($event.target.value)">
-                                        <option *ngFor="let sku of data.sku_row" [value]="sku?.skid">{{sku?.size}} {{sku.size_measuring_unit=='undefined'?'':sku.size_measuring_unit}}
+                                        <option *ngFor="let sku of data.sku_row" [value]="sku?.skid">{{sku?.size}}
+                                            {{sku.size_measuring_unit=='undefined'?'':sku.size_measuring_unit}}
 
                                         </option>
                                     </select>

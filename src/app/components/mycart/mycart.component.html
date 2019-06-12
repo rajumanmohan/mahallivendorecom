@@ -60,6 +60,9 @@
 				<div class="col-md-12 cart-1">
 					<div class="cart-item" *ngFor="let data of cartData">
 						<div class="row items align-items-center">
+							<div class="col-md-12">
+									<img class="del-img" (click)="delCart(data.cart_id)" src="assets/images/error-1.png">
+							</div>
 							<div class="col-md-3 text-center">
 								<img [src]="data.products.img">
 							</div>
@@ -112,7 +115,7 @@
 								</div>
 							</div>
 							<div class="col-md-2 del-row">
-								<img class="del-img" (click)="delCart(data.cart_id)" src="assets/images/error-1.png">
+								
 								<h6 class="total">Total: {{data.products.selling_price}}</h6>
 							</div>
 
