@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
     noData3;
     noData4;
     noData5;
+    ecomDeals = [];
     showVegetables() {
         this.showVegetablesScreen = true;
         this.showAllProducts = false;
@@ -276,15 +277,15 @@ export class HomeComponent implements OnInit {
             // "area": sessionStorage.Area === "undefined" ? "null" : sessionStorage.Area
         }
         this.appService.getEcomDeals(params).subscribe(res => {
-            this.ecomProds = res.json().products;
-            if (this.ecomProds != undefined) {
-                for (var i = 0; i < this.ecomProds.length; i++) {
-                    for (var j = 0; j < this.ecomProds[i].sku_row.length; j++) {
-                        this.ecomProds[i].selling_price = this.ecomProds[i].sku_row[0].selling_price;
-                        this.ecomProds[i].actual_price = this.ecomProds[i].sku_row[0].actual_price;
-                        this.ecomProds[i].image = this.ecomProds[i].sku_row[0].sku_images[0].sku_image;
-                        this.ecomProds[i].skid = this.ecomProds[i].sku_row[0].skid;
-                        this.skid = this.ecomProds[i].sku_row[0].skid;
+            this.ecomDeals = res.json().products;
+            if (this.ecomDeals != undefined) {
+                for (var i = 0; i < this.ecomDeals.length; i++) {
+                    for (var j = 0; j < this.ecomDeals[i].sku_row.length; j++) {
+                        this.ecomDeals[i].selling_price = this.ecomDeals[i].sku_row[0].selling_price;
+                        this.ecomDeals[i].actual_price = this.ecomDeals[i].sku_row[0].actual_price;
+                        this.ecomDeals[i].image = this.ecomDeals[i].sku_row[0].sku_images[0].sku_image;
+                        this.ecomDeals[i].skid = this.ecomDeals[i].sku_row[0].skid;
+                        this.skid = this.ecomDeals[i].sku_row[0].skid;
                     }
                 }
                 this.noData = false;

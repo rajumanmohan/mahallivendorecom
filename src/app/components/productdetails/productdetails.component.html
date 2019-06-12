@@ -5,8 +5,18 @@
         <a>{{catName}} </a>&nbsp;&nbsp;>&nbsp;{{subCatName}}&nbsp;&nbsp;>&nbsp;{{prodName}}
     </p>
     <div class="row">
-        <div class="col-md-6">
-            <img id="myImg" src="{{product_image}}" alt="Snow" [imageZoom]="zoomedImageSrc">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <img id="myImg" src="{{product_image}}" [imageZoom]="zoomedImageSrc" alt="Snow">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="img">
+                        <img *ngFor="let img of prodImages" [src]="img.sku_image" class="prod-images"
+                            (click)="showBigImage(img.sku_image)">
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="col-md-6 details">
             <h4>{{prodName}} </h4>
@@ -15,7 +25,8 @@
                     <div class="quantity-price text-center">
                         <select (change)="changeSize($event.target.value)">
                             <option *ngFor="let sku of skuData" [value]="sku.skid" data-icon="images/sample-1.jpg"
-                                class="left">{{sku.size}}
+                                class="left">{{sku.size}} {{sku.size_measuring_unit=='undefined'?'':sku.size_measuring_unit}}
+
                                 - BD {{sku.selling_price}}
                             </option>
                             <!-- <option value="" data-icon="images/office.jpg" class="left">1000gms-Rs 40.80</option>
@@ -51,14 +62,14 @@
         </div>
 
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-9">
             <div class="img">
                 <img *ngFor="let img of prodImages" [src]="img.sku_image" class="prod-images"
                     (click)="showBigImage(img.sku_image)">
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- The Modal -->
     <div id="myModal" class="modal">
         <span class="close">&times;</span>
@@ -84,7 +95,7 @@
                 <!--First slide-->
                 <div class="carousel-item active">
                     <div class="col-lg-3 col-md-6 col-sm-6 item" *ngFor="let data of prodData;let i=index">
-                        <div class="card">
+                        <div class="card" *ngIf="i<4">
                             <img src="assets/images/background-img.png" class="bg-layer">
                             <img class="img-fluid product-image" [src]="data.image" alt="Card image cap"
                                 (click)="showProduxtDetails(data.product_id)">
@@ -96,7 +107,8 @@
                                 </p>
                                 <div class="sort">
                                     <select (change)="changeSize($event.target.value)">
-                                        <option *ngFor="let sku of data.sku_row" [value]="sku?.skid">{{sku?.size}}
+                                        <option *ngFor="let sku of data.sku_row" [value]="sku?.skid">{{sku?.size}} {{sku.size_measuring_unit=='undefined'?'':sku.size_measuring_unit}}
+
                                         </option>
                                     </select>
                                 </div>

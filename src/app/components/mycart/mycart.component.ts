@@ -123,7 +123,7 @@ export class MycartComponent implements OnInit {
         this.showDeliveryAddress = false;
         this.showPaymentMethode = true;
         this.addId = addId;
-        swal("Selected successfully", "", "success");
+        swal("Address selected successfully", "", "success");
     }
 
     //items popup
@@ -154,8 +154,11 @@ export class MycartComponent implements OnInit {
                 this.cartData[i].products.skuValue = this.cartData[i].products.sku_details[0].size;
                 this.cartData[i].products.skid = this.cartData[i].products.sku_details[0].skid;
                 this.cartData[i].products.selling_price = this.cartData[i].products.sku_details[0].selling_price;
+                this.cartData[i].products.actual_price = this.cartData[i].products.sku_details[0].actual_price;
                 this.cartData[i].prodName = this.cartData[i].products.product_name;
                 this.cartData[i].products.img = this.cartData[i].products.sku_details[0].sku_images[0].sku_image;
+                this.cartData[i].products.size_measuring_unit = this.cartData[i].products.sku_details[0].size_measuring_unit;
+
             }
             this.cartCount = res.json().count;
             this.billing = res.json().selling_Price_bill;
@@ -189,8 +192,15 @@ export class MycartComponent implements OnInit {
         })
     }
     checkout() {
-        this.showCartItems = false;
-        this.showDeliveryAddress = true;
+        this.getCart();
+        if (this.cartData.length != 0) {
+            this.showCartItems = false;
+            this.showDeliveryAddress = true;
+        } else {
+            swal("Your cart is empty", "", "warning");
+            this.showCartItems = false;
+            this.showDeliveryAddress = false;
+        }
     }
     seleOpt;
     payId;
@@ -214,7 +224,10 @@ export class MycartComponent implements OnInit {
                 "vendor_id": sessionStorage.getItem('userId'),
                 "order_status": "placed",
                 "wholesaler_id": sessionStorage.wholeSellerId,
-                "item_type": "ecommerce"
+                "item_type": "ecommerce",
+                "Delivery_charge": 0,
+                "Coupon_Discount": 0,
+                "Final_amount": this.billing
             }
 
             this.appService.palceOrder(inData).subscribe(res => {

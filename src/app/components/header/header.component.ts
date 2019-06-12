@@ -224,6 +224,9 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/']);
         this.ngOnInit();
         this.getCart();
+        if (this.router.navigate(['/'])){
+            location.reload();
+        }
         // location.reload();
     }
     get f() { return this.registerForm.controls; }

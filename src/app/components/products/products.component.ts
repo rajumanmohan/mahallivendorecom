@@ -26,6 +26,7 @@ export class ProductsComponent implements OnInit {
     imgId;
     wholeProd;
     serProd;
+    catId1;
     constructor(private router: Router, public productService: ProductService, private appService: appService, private route: ActivatedRoute) {
         this.route.queryParams.subscribe(params => {
             if (params.action === "search") {
@@ -55,6 +56,7 @@ export class ProductsComponent implements OnInit {
             } else if (params.action === 'category') {
                 this.action = params.action;
                 this.catId = params.catId;
+                this.catId1 = params.catId;
                 this.catName = params.catName;
                 this.seeAll = true;
                 this.searchProd = false;
@@ -305,6 +307,7 @@ export class ProductsComponent implements OnInit {
         this.appService.productBySubCatId(this.subId, params).subscribe(res => {
             this.prodData = res.json().products;
             if (this.prodData != undefined) {
+                this.catId1 = this.catId === undefined ? this.prodData[0].category_id != undefined ? this.prodData[0].category_id : "" : this.catId;
                 for (var i = 0; i < this.prodData.length; i++) {
                     for (var j = 0; j < this.prodData[i].sku_row.length; j++) {
                         this.prodData[i].selling_price = this.prodData[i].sku_row[0].selling_price;
@@ -321,6 +324,9 @@ export class ProductsComponent implements OnInit {
             if (res.json().status === 400) {
                 this.noData = true;
             }
+            this.appService.getBrands(this.catId1 || 'null').subscribe(res => {
+                this.Brands = res.json().brands;
+            })
         }, err => {
 
         })
@@ -375,10 +381,13 @@ export class ProductsComponent implements OnInit {
         }, err => {
 
         })
+        this.appService.getBrands(this.catId || 'null').subscribe(res => {
+            this.Brands = res.json().brands;
+        })
         this.subCatName1 = '';
     }
     getBrands() {
-        this.appService.getBrands().subscribe(res => {
+        this.appService.getBrands(this.catId1 || 'null').subscribe(res => {
             this.Brands = res.json().brands;
         })
     }

@@ -253,9 +253,9 @@ export class appService {
         const headers = new Headers({ 'Content-Type': "application/JSON" });
         return this.http.put(AppSettings.modifyCart + '/' + cartId, params, { headers: headers });
     }
-    getBrands() {
+    getBrands(catId) {
         const headers = new Headers({ 'Content-Type': "application/JSON" });
-        return this.http.get(AppSettings.getBrands, { headers: headers });
+        return this.http.get(AppSettings.getBrands + "/" + catId, { headers: headers });
     }
     filterByBrandCat(catId, params) {
         const headers = new Headers({ 'Content-Type': "application/JSON" });

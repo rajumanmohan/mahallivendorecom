@@ -54,7 +54,7 @@ export const AppSettings = {
     changeForgot: baseUrl + "vendors/changepassword",
     updategetCart: baseUrl + "vendor/cart_details/updateuserorvenderid/session",
     modifyCart: baseUrl + "vendor/cart_details",
-    getBrands: baseUrl + "products/getbrands/ecom",
+    getBrands: baseUrl + "products/getbrandsbycat/ecom",
     filterByBrandCat: baseUrl + "products/filtercatproducts/brand",
     filterByBrandSubCat: baseUrl + "products/filtersubcatproducts/brand",
     filterByBrandDeals: baseUrl + "products/filterdealsofthedayecommersproducts/brand",

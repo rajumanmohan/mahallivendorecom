@@ -73,8 +73,7 @@
                                                                 </option>
                                                             </select>
                                                         </div> -->
-								<p class="details">Details : {{data.products.skuValue}},{{data.products.filter_color ||
-                                    "-" }}
+								<p class="details">Details : {{data.products.skuValue}} {{data.products.size_measuring_unit=='undefined'?'':data.products.size_measuring_unit}}
 									<!-- <span>
                                                                     <strike>BD {{data.products.actual_price}}</strike>
                                                                 </span> -->
@@ -102,7 +101,8 @@
 										</span>
 									</button>
 									<input type="text" value="1" name="quantity" [(ngModel)]="data.quantity"
-										readonly="readonly" value="{{data.quantity}}" class="text-center" disabled>
+										readonly="readonly" value="{{data.quantity}}" class="text-center"
+										style="margin-left: -7%;" disabled>
 									<button class="btn btn-icon btn-maroon btn-plus"
 										(click)="checkProdQuty(data.cart_id,data.product_id,data.sku_id,data.quantity)">
 										<span>
@@ -212,7 +212,10 @@
 									<label class="col-sm-4 col-md-4 col-form-label ">Mobile Number
 										<span>:</span>
 									</label>
-									<div class="col-sm-8 col-md-8 ">
+									<div class="col-sm-8 col-md-8  mobile-behrain">
+										<div class="input-group-prepend group">
+											<button class="input-button" type="button" id="button-addon1">+973</button>
+										</div>
 										<input myNumberOnly type="text " class="form-control "
 											[(ngModel)]="addData.mobile_number" name="mobile_number">
 									</div>

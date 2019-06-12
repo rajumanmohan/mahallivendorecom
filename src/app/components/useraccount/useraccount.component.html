@@ -27,6 +27,9 @@
                     <li [ngClass]="{'active':showMyOrders || showOrderDetails}" (click)="myOrder()">My Orders</li>
                     <li [ngClass]="{'active':showOfferZone || showManageUserOrders}" (click)="offerZone()">Manage User
                         Order</li>
+                        <!-- <li [ngClass]="{'active':deliverySlots}" (click)="showDeliverySlots()">Manage Delivery
+                            Charges
+                        </li> -->
                 </div>
             </ul>
         </div>
@@ -108,7 +111,10 @@
                     <label for="inputphoneno1" class="col-sm-3 col-form-label">Phone No
                         <span class="float-right">:</span>
                     </label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 mobile-behrain">
+                        <div class="input-group-prepend group">
+                            <button class="input-button" type="button" id="button-addon1">+973</button>
+                        </div>
                         <input type="text" class="form-control input-feild" id="inputphoneno1" placeholder="8586854500"
                             [(ngModel)]="profileData.mobile_number" name="mobile_number" ngControl="mobile_number"
                             required>
@@ -476,8 +482,10 @@
                 <div class="form-group row">
                     <label for="inputMblnbr" class="col-sm-2 col-form-label">Mobile Number
                     </label>
-                    <div class="col-sm-10">
-
+                    <div class="col-sm-10 mobile-behrain">
+                        <div class="input-group-prepend group">
+                            <button class="input-button" type="button" id="button-addon1">+973</button>
+                        </div>
                         <input type="text" class="form-control input-feild" id="inputNumber"
                             formControlName="mobile_number"
                             [ngClass]="{ 'is-invalid': submitted && f1.mobile_number.errors }">
@@ -589,8 +597,10 @@
                 <div class="form-group row">
                     <label for="inputMblnbr" class="col-sm-2 col-form-label">Mobile Number
                     </label>
-                    <div class="col-sm-10">
-
+                    <div class="col-sm-10 mobile-behrain">
+                        <div class="input-group-prepend group">
+                            <button class="input-button" type="button" id="button-addon1">+973</button>
+                        </div>
                         <input type="text" class="form-control input-feild" id="inputNumber" name="mobile_number"
                             [(ngModel)]="editAddData.mobile_number">
                         <!-- <div *ngIf="submitted && f1.mobile_number.errors" class="invalid-feedback">
@@ -1255,9 +1265,9 @@
                                 <h3>Manage User Orders</h3>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3">
-                                <div class="cust-filter" data-toggle="modal" data-target="#filter2">
+                                <!-- <div class="cust-filter" data-toggle="modal" data-target="#filter2">
                                     <i class="fa fa-filter" aria-hidden="true"></i> Filters
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <form class="form-inline form-rt">
@@ -1605,9 +1615,9 @@
                                 <h3>My Orders</h3>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3">
-                                <div class="cust-filter" data-toggle="modal" data-target="#filter">
+                                <!-- <div class="cust-filter" data-toggle="modal" data-target="#filter">
                                     <i class="fa fa-filter" aria-hidden="true"></i> Filters
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <form class="form-inline form-rt">
@@ -1926,6 +1936,7 @@
             </div>
         </div>
         <!-- ./manage order details -->
+        <!-- delslots -->
 
     </div>
 </div>

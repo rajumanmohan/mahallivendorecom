@@ -102,6 +102,7 @@ export class UseraccountComponent implements OnInit {
     showRequestAdmin = false;
     showEditAddress = false;
     showManageUserOrders = false;
+    deliverySlots = false;
     profile() {
         this.showNotifications = false;
         this.showOrderDetails = false;
@@ -122,6 +123,8 @@ export class UseraccountComponent implements OnInit {
         this.showEditAddress = false;
         this.showManageUserOrders = false;
         this.getProfile();
+        this.deliverySlots = false;
+
     }
 
     editProfile() {
@@ -143,6 +146,7 @@ export class UseraccountComponent implements OnInit {
         this.showRequestAdmin = false;
         this.showEditAddress = false;
         this.showManageUserOrders = false;
+        this.deliverySlots = false;
     }
 
     deliveryAddress() {
@@ -165,6 +169,7 @@ export class UseraccountComponent implements OnInit {
         this.showEditAddress = false;
         this.showManageUserOrders = false;
         this.getAdd();
+        this.deliverySlots = false;
     }
     addAddress() {
         this.showNotifications = false;
@@ -185,6 +190,7 @@ export class UseraccountComponent implements OnInit {
         this.showRequestAdmin = false;
         this.showEditAddress = false;
         this.showManageUserOrders = false;
+        this.deliverySlots = false;
     }
 
     // wishList() {
@@ -222,6 +228,7 @@ export class UseraccountComponent implements OnInit {
         this.showRequestAdmin = false;
         this.showEditAddress = false;
         this.showManageUserOrders = false;
+        this.deliverySlots = false;
     }
 
     myOrder() {
@@ -244,6 +251,7 @@ export class UseraccountComponent implements OnInit {
         this.showEditAddress = false;
         this.showManageUserOrders = false;
         this.getOrders();
+        this.deliverySlots = false;
     }
 
     // notifications() {
@@ -283,6 +291,7 @@ export class UseraccountComponent implements OnInit {
         this.showEditAddress = false;
         this.showManageUserOrders = false;
         this.ordDetails(ordId);
+        this.deliverySlots = false;
     }
     accountDetails() {
         this.showNotifications = false;
@@ -305,6 +314,7 @@ export class UseraccountComponent implements OnInit {
         this.showRequestAdmin = false;
         this.showEditAddress = false;
         this.getAccDet();
+        this.deliverySlots = false;
     }
     editAccountDetails() {
         this.showNotifications = false;
@@ -324,6 +334,7 @@ export class UseraccountComponent implements OnInit {
         this.showRequestAdmin = false;
         this.showEditAddress = false;
         this.showManageUserOrders = false;
+        this.deliverySlots = false;
     }
     cancelAdd() {
         this.showDeliveryAddress = true;
@@ -354,6 +365,7 @@ export class UseraccountComponent implements OnInit {
         this.showEditAddress = false;
         this.showManageUserOrders = false;
         this.getCategories();
+        this.deliverySlots = false;
     }
     showAddProducts2(Id) {
         this.showNotifications = false;
@@ -378,6 +390,7 @@ export class UseraccountComponent implements OnInit {
         this.showEditAddress = false;
         this.showManageUserOrders = false;
         this.getProducts(Id);
+        this.deliverySlots = false;
     }
     offerZone() {
         this.showNotifications = false;
@@ -393,6 +406,7 @@ export class UseraccountComponent implements OnInit {
         this.showAddProducts = false;
         // this.showAddProducts5 = false;
         // this.showManageUserOrders = false;
+        this.deliverySlots = false;
         this.showAccountDetails = false;
         this.editAccount = false;
         this.showRequestAdmin = false;
@@ -419,6 +433,7 @@ export class UseraccountComponent implements OnInit {
         this.showRequestAdmin = false;
         this.showEditAddress = false;
         this.showManageUserOrders = false;
+        this.deliverySlots = false;
     }
     requestAdmin() {
         this.showNotifications = false;
@@ -439,6 +454,7 @@ export class UseraccountComponent implements OnInit {
         this.showRequestAdmin = true;
         this.showEditAddress = false;
         this.showManageUserOrders = false;
+        this.deliverySlots = false;
     }
     showEditAdd(addId) {
         this.showNotifications = false;
@@ -458,6 +474,7 @@ export class UseraccountComponent implements OnInit {
         this.editAccount = false;
         this.showRequestAdmin = false;
         this.showEditAddress = true;
+        this.deliverySlots = false;
         this.editAdd(addId);
     }
     showVendorOrderDetails() {
@@ -478,6 +495,7 @@ export class UseraccountComponent implements OnInit {
         this.editAccount = false;
         this.showRequestAdmin = false;
         this.showEditAddress = false;
+        this.deliverySlots = false;
     }
     showUserOrderDetails(ordId) {
         this.showNotifications = false;
@@ -497,7 +515,29 @@ export class UseraccountComponent implements OnInit {
         this.editAccount = false;
         this.showRequestAdmin = false;
         this.showEditAddress = false;
+        this.deliverySlots = false;
         this.getUserOrdDetails(ordId);
+    }
+    showDeliverySlots() {
+        this.showNotifications = false;
+        this.showOrderDetails = false;
+        this.showMyOrders = false;
+        this.showMyProducts = false;
+        this.showWishlist = false;
+        this.showAddAddress = false;
+        this.showDeliveryAddress = false;
+        this.editUserProfile = false;
+        this.showProfile = false;
+        this.showOfferZone = false;
+        this.showAddProducts = false;
+        this.showAddProducts5 = false;
+        this.showManageUserOrders = false;
+        this.showAccountDetails = false;
+        this.editAccount = false;
+        this.showRequestAdmin = false;
+        this.showEditAddress = false;
+        this.deliverySlots = true;
+        // this.AddDeliverySlots();
     }
     email;
     profileData;
@@ -798,7 +838,7 @@ export class UseraccountComponent implements OnInit {
     //     this.status = status;
     // }
     Type(type) {
-        this.type = type;
+        this.type = type || 'Home';
     }
     filterVendor() {
         var inData = {
