@@ -16,6 +16,7 @@ export class ProductdetailsComponent implements OnInit {
     constructor(private route: ActivatedRoute, public productService: ProductService, private appService: appService, private router: Router) {
         this.route.queryParams.subscribe(params => {
             this.prodId = params.prodId;
+        this.getProductById();
         });
     }
     item = {
@@ -28,8 +29,6 @@ export class ProductdetailsComponent implements OnInit {
         this.sub = this.route
             .data
             .subscribe(v => console.log(v));
-        this.getProductById();
-
     }
     itemIncrease() {
         let thisObj = this;
@@ -75,6 +74,7 @@ export class ProductdetailsComponent implements OnInit {
     cat_id1;
     getProductById() {
         this.skuData = [];
+        this.prodImages = [];
         this.appService.getProductById(this.prodId).subscribe(res => {
             this.prodId = res.json().products.product_id;
             this.prodsData = res.json().products;
@@ -204,7 +204,7 @@ export class ProductdetailsComponent implements OnInit {
             }
         })
     }
-    // showProduxtDetails(prodId) {
-    //     this.router.navigate(['/productdetails'], { queryParams: { prodId: prodId } });
-    // }
+    showProduxtDetails(prodId) {
+        this.router.navigate(['/productdetails'], { queryParams: { prodId: prodId } });  
+    }
 }

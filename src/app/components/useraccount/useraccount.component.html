@@ -465,15 +465,15 @@
             <p>
                 <strong>Add New Adrress</strong>
             </p>
-            <form [formGroup]="addressForm" (click)="saveAddress(newItem)">
+            <form [formGroup]="addressForm" (click)="saveAddress()">
                 <div class="form-group row">
                     <label for="inputname1" class="col-sm-2 col-form-label">Full Name
                     </label>
                     <div class="col-sm-10">
 
                         <input type="text" class="form-control input-feild" id="inputname1" formControlName="full_name"
-                            [ngClass]="{ 'is-invalid': submitted && f1.full_name.errors }">
-                        <div *ngIf="submitted && f1.full_name.errors" class="invalid-feedback">
+                            [ngClass]="{ 'is-invalid': submitted1 && f1.full_name.errors }">
+                        <div *ngIf="submitted1 && f1.full_name.errors" class="invalid-feedback">
                             <div *ngIf="f1.full_name.errors.required">Full Name is required</div>
                         </div>
 
@@ -488,8 +488,8 @@
                         </div>
                         <input type="text" class="form-control input-feild" id="inputNumber"
                             formControlName="mobile_number"
-                            [ngClass]="{ 'is-invalid': submitted && f1.mobile_number.errors }">
-                        <div *ngIf="submitted && f1.mobile_number.errors" class="invalid-feedback">
+                            [ngClass]="{ 'is-invalid': submitted1 && f1.mobile_number.errors }">
+                        <div *ngIf="submitted1 && f1.mobile_number.errors" class="invalid-feedback">
                             <div *ngIf="f1.mobile_number.errors.required">Mobile Number is required</div>
                         </div>
 
@@ -501,8 +501,8 @@
                     <div class="col-sm-10">
 
                         <input type="text" class="form-control input-feild" id="inputhouseno" formControlName="house_no"
-                            [ngClass]="{ 'is-invalid': submitted && f1.house_no.errors }">
-                        <div *ngIf="submitted && f1.house_no.errors" class="invalid-feedback">
+                            [ngClass]="{ 'is-invalid': submitted1 && f1.house_no.errors }">
+                        <div *ngIf="submitted1 && f1.house_no.errors" class="invalid-feedback">
                             <div *ngIf="f1.house_no.errors.required">House Number is required</div>
                         </div>
 
@@ -514,8 +514,8 @@
                     <div class="col-sm-4">
 
                         <input type="text" class="form-control input-feild" id="inputLand" formControlName="landmark"
-                            [ngClass]="{ 'is-invalid': submitted && f1.landmark.errors }">
-                        <div *ngIf="submitted && f1.landmark.errors" class="invalid-feedback">
+                            [ngClass]="{ 'is-invalid': submitted1 && f1.landmark.errors }">
+                        <div *ngIf="submitted1 && f1.landmark.errors" class="invalid-feedback">
                             <div *ngIf="f1.landmark.errors.required">Landmark is required</div>
                         </div>
 
@@ -528,8 +528,8 @@
                             <option *ngFor="let city of Cities" [ngValue]="city">{{city}}</option>
                         </select> -->
                         <input type="text" class="form-control input-feild" id="inputpincode" formControlName="city"
-                            [ngClass]="{ 'is-invalid': submitted && f1.city.errors }">
-                        <div *ngIf="submitted && f1.city.errors" class="invalid-feedback">
+                            [ngClass]="{ 'is-invalid': submitted1 && f1.city.errors }">
+                        <div *ngIf="submitted1 && f1.city.errors" class="invalid-feedback">
                             <div *ngIf="f1.city.errors.required">City is required</div>
                         </div>
                     </div>
@@ -543,8 +543,8 @@
                             <option *ngFor="let state of States" [ngValue]="state">{{state}}</option>
                         </select> -->
                         <input type="text" class="form-control input-feild" id="inputpincode1" formControlName="state"
-                            [ngClass]="{ 'is-invalid': submitted && f1.state.errors }">
-                        <div *ngIf="submitted && f1.state.errors" class="invalid-feedback">
+                            [ngClass]="{ 'is-invalid': submitted1 && f1.state.errors }">
+                        <div *ngIf="submitted1 && f1.state.errors" class="invalid-feedback">
                             <div *ngIf="f1.state.errors.required">state is required</div>
                         </div>
                     </div>
@@ -553,8 +553,8 @@
                     <div class="col-sm-4">
 
                         <input type="text" class="form-control input-feild" id="inputpincode2"
-                            formControlName="pin_code" [ngClass]="{ 'is-invalid': submitted && f1.pin_code.errors }">
-                        <div *ngIf="submitted && f1.pin_code.errors" class="invalid-feedback">
+                            formControlName="pin_code" [ngClass]="{ 'is-invalid': submitted1 && f1.pin_code.errors }">
+                        <div *ngIf="submitted1 && f1.pin_code.errors" class="invalid-feedback">
                             <div *ngIf="f1.pin_code.errors.required">Pin-Code is required</div>
                         </div>
 
@@ -999,7 +999,7 @@
                                 <table class="table cust-table">
                                     <thead class="thead-color">
                                         <tr>
-                                            <th scope="col">S.No</th>
+                                            <!-- <th scope="col">S.No</th> -->
                                             <th scope="col">Item</th>
                                             <th scope="col">Item Name</th>
                                             <th scope="col">Brand</th>
@@ -1008,7 +1008,7 @@
                                     </thead>
                                     <tbody class="cust-tbody" *ngIf="(reqProds | filter:filter) as reqProds">
                                         <tr *ngFor="let reqProds of reqProds | filter:filter;let i=index">
-                                            <th scope="row" class="cust-1">{{i+1}}</th>
+                                            <!-- <th scope="row" class="cust-1">{{i+1}}</th> -->
                                             <td class="add-img">
                                                 <img [src]="reqProds.productimage" alt="Potatoes">
                                             </td>

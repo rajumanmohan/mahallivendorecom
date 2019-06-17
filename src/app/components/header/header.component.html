@@ -1077,13 +1077,13 @@
 
                                             <li>
                                                 <i class="fas fa-angle-left sub-cat"></i>
-                                                <a (click)="showProbySubCat(sub.id,'subCategory',cat.category_name,sub.sub_category_name)"
+                                                <a (click)="showProbySubCat(sub.id,'subCategory',sub.cat_name,sub.sub_category_name)"
                                                     (mouseenter)="showProds(sub.id)">{{sub.sub_category_name}}</a>
                                                 <div class="product-name">
                                                     <div class="product-name-div row">
                                                         <ul>
                                                             <li *ngFor="let product of productArr" class="prodName-li">
-                                                                <a class="prodName-li"
+                                                                <a class="prodName-li1"
                                                                     (click)="showProduxtDetails(product.product_id)">{{product.product_name}}</a>
                                                             </li>
                                                         </ul>

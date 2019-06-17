@@ -21,7 +21,7 @@ export const AppSettings = {
     getBanners: baseUrl + "banners/e_commerce",
     productByCatId: baseUrl + "products/category",
     productBySubCatId: baseUrl + "products/sub_category_id",
-    searchProducts: baseUrl + 'products/search',
+    searchProducts: baseUrl + 'products/search/ecom',
     addToCart: baseUrl + "vendor/cart_details",
     getCart: baseUrl + 'vendor/cart_details/ecommerce',
     delCart: baseUrl + 'vendor/cart_details',

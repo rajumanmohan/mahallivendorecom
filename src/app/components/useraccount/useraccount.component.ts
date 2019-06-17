@@ -45,6 +45,8 @@ export class UseraccountComponent implements OnInit {
     resetForm: FormGroup;
     productForm: FormGroup
     submitted = false;
+    submitted1 = false;
+
     deal_price_errors = false;
     quantity_errors = false;
     discount_error = false;
@@ -613,7 +615,7 @@ export class UseraccountComponent implements OnInit {
 
     saveAddress() {
         this.addressForm.value.address_type = this.type;
-        this.submitted = true;
+        this.submitted1 = true;
         // stop here if form is invalid
         if (this.addressForm.invalid) {
             return;
@@ -837,6 +839,9 @@ export class UseraccountComponent implements OnInit {
     // onSelect(status) {
     //     this.status = status;
     // }
+    selectAdd(){
+        swal("Address selected successfully","","success")
+    }
     Type(type) {
         this.type = type || 'Home';
     }
